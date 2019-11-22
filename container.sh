@@ -15,7 +15,7 @@ if [ -z $1 ]; then
     "
 elif [ "$1" == "init" ]; then
     echo "Build..."
-    docker-compose up -d --build --scale elasticsearch_slave=1
+    docker-compose up -d --build --scale elasticsearch_slave=0
 elif [ "$1" == "start" ]; then
     docker-compose start
 elif [ "$1" == "stop" ]; then
