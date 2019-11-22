@@ -39,7 +39,11 @@ elif [ "$1" == "ssh" ]; then
         docker exec -it $2 /bin/bash 
     fi
 elif [ "$1" == "logs" ]; then
-    docker-compose logs -f
+    if [ -z $2 ]; then
+        docker-compose logs -f
+    else
+        docker-compose logs -f $2
+    fi
 else
     echo $1 ": command not found"
     echo -e "Available options:
