@@ -24,7 +24,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 2048M
+          memory: 1024M
     depends_on:
       - elasticsearch
   kibana:
@@ -55,7 +55,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 1024M
+          memory: 2048M
 volumes:
   filebeatdata:
     driver: local
