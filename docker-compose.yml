@@ -40,12 +40,4 @@ services:
     image: logstash:7.4.2
     depends_on:
       - elasticsearch
-  filebeat:
-    image: filebeat:7.4.2
-    environment:
-      - "WAIT_FOR_HOSTS=elasticsearch:9200 kibana:5601"
-      - "HOST_ELASTICSEARCH=elasticsearch:9200"
-      - "HOST_KIBANA=kibana:5601"
-    depends_on:
-      - elasticsearch
 
