@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   fluentd:
-    image: ${REPO_NAME}/aftersales_fluentd:${FLUENTD_TAG_VERSION}
+    image: ${REPO_NAME}/aftersales_fluentd:1.0.1
     volumes:
       - ./Logs/fluentd:/fluentd/log
       - ./Docker/fluentd/fluent.conf:/fluentd/etc/fluent.conf:ro
