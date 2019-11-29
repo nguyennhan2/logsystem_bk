@@ -43,4 +43,6 @@ services:
   filebeat:
     image: store/elastic/filebeat:6.8.5
     user: root
+    volumes:
+      - /config/filebeat.yml:/config/filebeat.yml:ro
 
