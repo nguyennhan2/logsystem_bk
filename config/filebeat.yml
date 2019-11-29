@@ -1,18 +1,21 @@
-# https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-configuration-details.html
+filebeat.inputs:
+- type: container
+  paths: 
+    - '/var/lib/docker/containers/*/*.log'
 
-# https://www.elastic.co/guide/en/beats/filebeat/current/configuration-global-options.html
-filebeat.spool_size: 2048
-filebeat.idle_timeout: 30s
+processors:
+- add_docker_metadata:
+    host: "unix:///var/run/docker.sock"
 
-# https://www.elastic.co/guide/en/beats/filebeat/current/configuration-filebeat-options.html
-filebeat.prospectors:
-- input_type: log
-  paths:
-    - /mnt/log/*.log
-  tags: ["winston"]  ## tags for the records
-  fields:
-    instance_id: "service_1" ## add extra metadata
+- decode_json_fields:
+    fields: ["message"]
+    target: "json"
+    overwrite_keys: true
 
-# https://www.elastic.co/guide/en/beats/filebeat/current/logstash-output.html
-output.logstash:
-  hosts: ["logstash:5044"]
+output.elasticsearch:
+  hosts: ["elasticsearch:9200"]
+  indices:
+    - index: "filebeat-%{[agent.version]}-%{+yyyy.MM.dd}"
+
+logging.json: true
+logging.metrics.enabled: false
