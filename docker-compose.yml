@@ -45,4 +45,5 @@ services:
     user: root
     volumes:
       - /config/filebeat.yml:/config/filebeat.yml:ro
-
+      - /var/lib/docker:/var/lib/docker:ro
+      - /var/run/docker.sock:/var/run/docker.sock
