@@ -1,6 +1,11 @@
 version: '3.7'
 
 services:
+  fluentd:
+    image: ${REPO_NAME}/aftersales_fluentd:${FLUENTD_TAG_VERSION}
+    volumes:
+      - ./Logs/fluentd:/fluentd/log
+      - ./Docker/fluentd/fluent.conf:/fluentd/etc/fluent.conf:ro
   elasticsearch:
     image: elasticsearch:7.4.2
     environment:
