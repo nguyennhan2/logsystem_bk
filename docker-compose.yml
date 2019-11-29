@@ -42,8 +42,6 @@ services:
       - elasticsearch
   filebeat:
     image: filebeat:7.4.2
-    command: -e -E output.logstash.enabled=true
-    user: root
     environment:
       - "WAIT_FOR_HOSTS=elasticsearch:9200 kibana:5601"
       - "HOST_ELASTICSEARCH=elasticsearch:9200"
