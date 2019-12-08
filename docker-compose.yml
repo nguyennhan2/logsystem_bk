@@ -47,3 +47,18 @@ services:
       - /config/filebeat.yml:/config/filebeat.yml:ro
       - /var/lib/docker:/var/lib/docker:ro
       - /var/run/docker.sock:/var/run/docker.sock
+  metricbeat:
+    image: ${REPO_NAME}/aftersales_metricbeat:${METRICBEAT_TAG_VERSION}
+    command: -e -E output.logstash.enabled=false
+    user: root
+    environment:
+      - "WAIT_FOR_HOSTS=elasticsearch:9200 kibana:5601"
+      - "HOST_ELASTICSEARCH=elasticsearch:9200"
+      - "HOST_KIBANA=kibana:5601"
+    volumes:
+      - ./Docker/metricbeat/metricbeat.yml:/metricbeat/metricbeat.yml:ro
+      - ./Docker/metricbeat/policy.json:/usr/local/bin/policy.json:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    depends_on:
+      - elasticsearch
+      - kibana
