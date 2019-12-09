@@ -1,0 +1,7 @@
+version: '3.7'
+services:
+  filebeat:
+    build:
+      context: .
+      dockerfile: ./filebeat/Dockerfile
+    image: logsystem_bk:${FILEBEAT_TAG_VERSION}
