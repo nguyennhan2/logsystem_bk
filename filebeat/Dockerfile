@@ -1,7 +1,7 @@
 FROM docker.elastic.co/beats/filebeat:6.5.2
 
 # Copy custom configuration file
-COPY filebeat.yml /usr/share/filebeat/filebeat.yml
+COPY ./filebeat/filebeat.yml /usr/share/filebeat/filebeat.yml
 
 USER root
 # Create a directory to map volume with all docker log files
