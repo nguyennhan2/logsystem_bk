@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   elasticsearch:
-    image: elasticsearch:7.4.2
+    image: elasticsearch:7.5.0
     environment:
       - node.name=elasticsearch
       - cluster.initial_master_nodes=elasticsearch
@@ -17,7 +17,7 @@ services:
         soft: -1
         hard: -1
   elasticsearch_slave:
-    image: elasticsearch:7.4.2
+    image: elasticsearch:7.5.0
     environment:
       - discovery.seed_hosts=elasticsearch
       - cluster.name=logsystem-cluster
@@ -31,19 +31,18 @@ services:
         soft: -1
         hard: -1
   kibana:
-    image: kibana:7.4.2
+    image: kibana:7.5.0
     ports:
       - 5601:5601
     depends_on:
       - elasticsearch
   logstash:
-    image: logstash:7.4.2
+    image: logstash:7.5.0
     depends_on:
       - elasticsearch
   filebeat:
-    image: store/elastic/filebeat:6.8.5
-    user: root
+    image: store/elastic/filebeat:7.5.0
     volumes:
       - /config/filebeat.yml:/filebeat/filebeat.yml:ro
-      - /var/lib/docker:/var/lib/docker:ro
-      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - kibana
