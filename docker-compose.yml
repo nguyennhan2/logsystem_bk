@@ -44,6 +44,6 @@ services:
     image: store/elastic/filebeat:6.8.5
     user: root
     volumes:
-      - /config/filebeat.yml:/config/filebeat.yml:ro
+      - /filebeat/filebeat.yml:/config/filebeat.yml:ro
       - /var/lib/docker:/var/lib/docker:ro
       - /var/run/docker.sock:/var/run/docker.sock
