@@ -1,24 +1,24 @@
-filebeat.registry_file: /usr/share/filebeat/data/registry
-filebeat.config.prospectors:
-#prospectors dynamically loaded from the sub-directory
-  path: ${path.config}/prospectors.d/*.yml
-  reload.enabled: false
 filebeat.modules:
 #Filebeat system module consumes logs from host OS through a mounted volume
 - module: system
   syslog:
+    enable: true
     var.paths: ["/var/log/messages*"]
 #Nginx Module to consume to access and error logs from mounted volume
 - module: nginx
   access:
+    enabled: true
     var.paths: ["/var/log/nginx/access.log*"]
   error:
+    enabled: true
     var.paths: ["/var/log/nginx/error.log*"]
 #Apache2 Module to consume to access and error logs from mounted volume
 - module: apache2
   access:
+    enabled: true
     var.paths: ["/var/log/apache2/access.log*"]
   error:
+    enabled: true
     var.paths: ["/var/log/apache2/error.log*"]
 #All data to indexed to Elasticsearch
 output.elasticsearch:
