@@ -21,6 +21,10 @@ filebeat.modules:
 #    enabled: true
 #    var.paths: ["/var/log/apache2/error.log*"]
 #All data to indexed to Elasticsearch
+filebeat.inputs:
+- type: syslog
+  protocol.udp:
+    host: "localhost:9000"
 output.elasticsearch:
     username: "metricbeat_anonymous_user"
     hosts: ["elasticsearch:9200"]
