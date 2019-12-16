@@ -46,3 +46,4 @@ services:
       - /config/filebeat.yml:/filebeat/filebeat.yml:ro
     depends_on:
       - kibana
+      - elasticsearch
