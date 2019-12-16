@@ -20,12 +20,12 @@ filebeat.modules:
 #  error:
 #    enabled: true
 #    var.paths: ["/var/log/apache2/error.log*"]
-##All data to indexed to Elasticsearch
-#output.elasticsearch:
-#    username: "metricbeat_anonymous_user"
-#    hosts: ["elasticsearch:9200"]
-#setup.kibana:
-#    host: "kibana:5601"
+#All data to indexed to Elasticsearch
 output.elasticsearch:
-  hosts: ["elasticsearch:9200"]
-  index: "%{[fields.log_type]}-%{[agent.version]}-%{+yyyy.MM.dd}"
+    username: "metricbeat_anonymous_user"
+    hosts: ["elasticsearch:9200"]
+setup.kibana:
+    host: "kibana:5601"
+#output.elasticsearch:
+#  hosts: ["elasticsearch:9200"]
+#  index: "%{[fields.log_type]}-%{[agent.version]}-%{+yyyy.MM.dd}"
