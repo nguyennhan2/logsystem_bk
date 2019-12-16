@@ -28,7 +28,7 @@ prospectors:
 filebeat.inputs:
 - type: log
   paths:
-    - /usr/share/filebeat/logs/messages*
+    - /var/logs/
 output.elasticsearch:
     username: "metricbeat_anonymous_user"
     hosts: ["elasticsearch:9200"]
