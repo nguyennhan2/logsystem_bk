@@ -24,8 +24,7 @@ filebeat.modules:
 filebeat.inputs:
 - type: log
   paths:
-    - /var/log/messages
-    - /var/log/*.log
+    - /var/log/messages*
 output.elasticsearch:
     username: "metricbeat_anonymous_user"
     hosts: ["elasticsearch:9200"]
