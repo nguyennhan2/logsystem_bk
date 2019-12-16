@@ -22,9 +22,10 @@ filebeat.modules:
 #    var.paths: ["/var/log/apache2/error.log*"]
 #All data to indexed to Elasticsearch
 filebeat.inputs:
-- type: syslog
-  protocol.udp:
-    host: "localhost:9000"
+- type: log
+  paths:
+    - /var/log/messages
+    - /var/log/*.log
 output.elasticsearch:
     username: "metricbeat_anonymous_user"
     hosts: ["elasticsearch:9200"]
