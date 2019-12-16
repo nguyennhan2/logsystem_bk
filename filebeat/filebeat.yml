@@ -26,3 +26,6 @@ filebeat.modules:
 #    hosts: ["elasticsearch:9200"]
 #setup.kibana:
 #    host: "kibana:5601"
+output.elasticsearch:
+  hosts: ["elasticsearch:9200"]
+  index: "%{[fields.log_type]}-%{[agent.version]}-%{+yyyy.MM.dd}"
