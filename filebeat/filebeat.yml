@@ -3,7 +3,7 @@ filebeat.modules:
 - module: system
   syslog:
     enable: true
-    var.paths: ["/var/log/messages*"]
+    var.paths: ["/usr/share/filebeat/logs/messages*"]
 #Nginx Module to consume to access and error logs from mounted volume
 #- module: nginx
 #  access:
@@ -28,7 +28,7 @@ prospectors:
 filebeat.inputs:
 - type: log
   paths:
-    - /var/log/messages*
+    - /usr/share/filebeat/logs/messages*
 output.elasticsearch:
     username: "metricbeat_anonymous_user"
     hosts: ["elasticsearch:9200"]
