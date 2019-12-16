@@ -21,6 +21,10 @@ filebeat.modules:
 #    enabled: true
 #    var.paths: ["/var/log/apache2/error.log*"]
 #All data to indexed to Elasticsearch
+prospectors:
+ - paths:
+   - /var/lib/docker/containers/*/*.log
+   document_type: syslog
 filebeat.inputs:
 - type: log
   paths:
