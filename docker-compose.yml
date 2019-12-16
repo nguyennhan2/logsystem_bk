@@ -43,7 +43,7 @@ services:
   filebeat:
     image: docker.elastic.co/beats/filebeat:7.5.0
     volumes:
-      - /config/filebeat.yml:/filebeat/filebeat.yml:ro
+      - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
     depends_on:
       - kibana
       - elasticsearch
