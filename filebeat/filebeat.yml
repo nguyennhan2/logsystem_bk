@@ -3,7 +3,7 @@ filebeat.modules:
 - module: system
   syslog:
     enable: true
-    var.paths: ["/usr/share/filebeat/logs/syslog.log*"]
+#    var.paths: ["/var/log/boot.log"]
 #Nginx Module to consume to access and error logs from mounted volume
 #- module: nginx
 #  access:
@@ -21,16 +21,16 @@ filebeat.modules:
 #    enabled: true
 #    var.paths: ["/var/log/apache2/error.log*"]
 #All data to indexed to Elasticsearch
-prospectors:
- - paths:
-   - /var/lib/docker/containers/*/*.log
-   document_type: syslog
+#prospectors:
+# - paths:
+#   - /var/lib/docker/containers/*/*.log
+#   document_type: syslog
 filebeat.inputs:
 - type: log
   paths:
-    - /usr/share/filebeat/logs/syslog.log
+    - /var/log/boot.log
 output.elasticsearch:
-    username: "metricbeat_anonymous_user"
+#    username: "metricbeat_anonymous_user"
     hosts: ["elasticsearch:9200"]
 setup.kibana:
     host: "kibana:5601"
