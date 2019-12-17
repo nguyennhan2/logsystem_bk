@@ -49,6 +49,7 @@ services:
       - /var/log/messages:/usr/share/filebeat/logs/messagess-20191201
       - /var/log/messages:/usr/share/filebeat/logs/messages-20191208
       - /var/log/messages:/usr/share/filebeat/logs/messages-20191215
+    user: root
     depends_on:
       - kibana
       - elasticsearch
