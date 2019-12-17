@@ -32,6 +32,7 @@ filebeat.inputs:
 output.elasticsearch:
 #    username: "metricbeat_anonymous_user"
     hosts: ["elasticsearch:9200"]
+    index: "%{[fields.log_type]}-%{[agent.version]}-%{+yyyy.MM.dd}"
 setup.kibana:
     host: "kibana:5601"
 #output.elasticsearch:
