@@ -44,11 +44,11 @@ services:
     image: docker.elastic.co/beats/filebeat:7.5.0
     volumes:
       - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
-      - /var/log/messages:/var/log/messages
-      - /var/log/messages:/var/log/messages-20191124
-      - /var/log/messages:/var/log/messages-20191201
-      - /var/log/messages:/var/log/messages-20191208
-      - /var/log/messages:/var/log/messages-20191215
+      - /var/log/messages:/usr/share/filebeat/logs/messages
+      - /var/log/messages:/usr/share/filebeat/logs/messages-20191124
+      - /var/log/messages:/usr/share/filebeat/logs/messagess-20191201
+      - /var/log/messages:/usr/share/filebeat/logs/messages-20191208
+      - /var/log/messages:/usr/share/filebeat/logs/messages-20191215
     depends_on:
       - kibana
       - elasticsearch
