@@ -5,20 +5,20 @@ filebeat.modules:
     enable: true
 #    var.paths: ["/var/log/boot.log"]
 #Nginx Module to consume to access and error logs from mounted volume
-#- module: nginx
-#  access:
-#    enabled: true
+- module: nginx
+  access:
+    enabled: true
 #    var.paths: ["/var/log/nginx/access.log*"]
-#  error:
-#    enabled: true
+  error:
+    enabled: true
 #    var.paths: ["/var/log/nginx/error.log*"]
 ##Apache2 Module to consume to access and error logs from mounted volume
-#- module: apache2
-#  access:
-#    enabled: true
+- module: apache2
+  access:
+    enabled: true
 #    var.paths: ["/var/log/apache2/access.log*"]
-#  error:
-#    enabled: true
+  error:
+    enabled: true
 #    var.paths: ["/var/log/apache2/error.log*"]
 #All data to indexed to Elasticsearch
 #prospectors:
