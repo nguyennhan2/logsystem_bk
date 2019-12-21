@@ -16,41 +16,17 @@ filebeat.modules:
 - module: apache2
   access:
     enabled: true
-    var.paths: ["/usr/share/filebeat/logs/www/hcmut-access.log*"]
+    var.paths: ["/usr/share/filebeat/logs/www/hcmut-access.log*", "/usr/share/filebeat/logs/www/hcmut-name.log*"]
   error:
     enabled: true
     var.paths: ["/usr/share/filebeat/logs/www/hcmut-error.log*"]
-#All data to indexed to Elasticsearch
-#prospectors:
-# - paths:
-#   - /var/lib/docker/containers/*/*.log
-#   document_type: syslog
-filebeat.inputs:
-- type: log
-  paths:
-    - /usr/share/filebeat/logs/www/hcmut-name.log
+#filebeat.inputs:
+#- type: log
+#  paths:
+#    -
 output.elasticsearch:
     hosts: ["elasticsearch:9200", "localhost:5044"]
 #    index: "%{[fields.log_type]}-%{[agent.version]}-%{+yyyy.MM.dd}"
 setup.kibana:
     host: "kibana:5601"
-#output.elasticsearch:
-#  hosts: ["elasticsearch:9200"]
-#  index: "%{[fields.log_type]}-%{[agent.version]}-%{+yyyy.MM.dd}"
 
-#
-#filebeat.inputs:
-#- type: log
-#  enabled: true
-#  paths:
-#    - /usr/share/filebeat/logs/dns03/systemd*
-#  fields:
-#    type: dns03-syslog
-#  fields_under_root: true
-#  encoding: utf-8
-#  exclude_files: [".gz"]
-#  ignore_older: 3h
-#output.logstash:
-#    hosts: ["localhost:5044"]
-#    loadbalance: true
-#    ssl.enabled: false
