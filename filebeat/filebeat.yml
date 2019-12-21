@@ -51,6 +51,6 @@ filebeat.inputs:
   exclude_files: [".gz"]
   ignore_older: 3h
 output.logstash:
-    hosts: ["logstash:5044"]
+    hosts: ["localhost:5044"]
     loadbalance: true
     ssl.enabled: false
