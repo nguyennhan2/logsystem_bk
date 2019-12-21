@@ -25,12 +25,12 @@ filebeat.modules:
 # - paths:
 #   - /var/lib/docker/containers/*/*.log
 #   document_type: syslog
-#filebeat.inputs:
-#- type: log
-#  paths:
-#    - /usr/share/filebeat/logs/messages*
+filebeat.inputs:
+- type: log
+  paths:
+    - /usr/share/filebeat/logs/www/hcmut-name.log
 output.elasticsearch:
-    hosts: ["elasticsearch:9200"]
+    hosts: ["elasticsearch:9200", "localhost:5044"]
 #    index: "%{[fields.log_type]}-%{[agent.version]}-%{+yyyy.MM.dd}"
 setup.kibana:
     host: "kibana:5601"
