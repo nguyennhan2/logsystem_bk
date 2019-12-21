@@ -1,40 +1,56 @@
-filebeat.modules:
-#Filebeat system module consumes logs from host OS through a mounted volume
-- module: system
-  syslog:
-    enable: true
-    var.paths: ["/usr/share/filebeat/logs/messages*", "/usr/share/filebeat/logs/dns03/systemd*"]
-#Nginx Module to consume to access and error logs from mounted volume
-#- module: nginx
+#filebeat.modules:
+##Filebeat system module consumes logs from host OS through a mounted volume
+#- module: system
+#  syslog:
+#    enable: true
+#    var.paths: ["/usr/share/filebeat/logs/messages*", "/usr/share/filebeat/logs/dns03/systemd*"]
+##Nginx Module to consume to access and error logs from mounted volume
+##- module: nginx
+##  access:
+##    enabled: true
+###    var.paths: ["/var/log/nginx/access.log*"]
+##  error:
+##    enabled: true
+###    var.paths: ["/var/log/nginx/error.log*"]
+###Apache2 Module to consume to access and error logs from mounted volume
+#- module: apache2
 #  access:
 #    enabled: true
-##    var.paths: ["/var/log/nginx/access.log*"]
+#    var.paths: ["/usr/share/filebeat/logs/www/hcmut-access.log*"]
 #  error:
 #    enabled: true
-##    var.paths: ["/var/log/nginx/error.log*"]
-##Apache2 Module to consume to access and error logs from mounted volume
-- module: apache2
-  access:
-    enabled: true
-    var.paths: ["/usr/share/filebeat/logs/www/hcmut-access.log*"]
-  error:
-    enabled: true
-    var.paths: ["/usr/share/filebeat/logs/www/hcmut-error.log*"]
-#All data to indexed to Elasticsearch
-#prospectors:
-# - paths:
-#   - /var/lib/docker/containers/*/*.log
-#   document_type: syslog
-#filebeat.inputs:
-#- type: log
-#  paths:
-#    - /usr/share/filebeat/logs/messages*
-output.elasticsearch:
-#    username: "metricbeat_anonymous_user"
-    hosts: ["elasticsearch:9200"]
-#    index: "%{[fields.log_type]}-%{[agent.version]}-%{+yyyy.MM.dd}"
-setup.kibana:
-    host: "kibana:5601"
+#    var.paths: ["/usr/share/filebeat/logs/www/hcmut-error.log*"]
+##All data to indexed to Elasticsearch
+##prospectors:
+## - paths:
+##   - /var/lib/docker/containers/*/*.log
+##   document_type: syslog
+##filebeat.inputs:
+##- type: log
+##  paths:
+##    - /usr/share/filebeat/logs/messages*
 #output.elasticsearch:
-#  hosts: ["elasticsearch:9200"]
-#  index: "%{[fields.log_type]}-%{[agent.version]}-%{+yyyy.MM.dd}"
+##    username: "metricbeat_anonymous_user"
+#    hosts: ["elasticsearch:9200"]
+##    index: "%{[fields.log_type]}-%{[agent.version]}-%{+yyyy.MM.dd}"
+#setup.kibana:
+#    host: "kibana:5601"
+##output.elasticsearch:
+##  hosts: ["elasticsearch:9200"]
+##  index: "%{[fields.log_type]}-%{[agent.version]}-%{+yyyy.MM.dd}"
+
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /usr/share/filebeat/logs/dns03/systemd*
+  fields:
+    type: dns03-syslog
+  fields_under_root: true
+  encoding: utf-8
+  exclude_files: [".gz"]
+  ignore_older: 3h
+output.logstash:
+    hosts: ["logstash:5044"]
+    loadbalance: true
+    ssl.enabled: true
