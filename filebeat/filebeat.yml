@@ -53,4 +53,4 @@ filebeat.inputs:
 output.logstash:
     hosts: ["logstash:5044"]
     loadbalance: true
-    ssl.enabled: true
+    ssl.enabled: false
